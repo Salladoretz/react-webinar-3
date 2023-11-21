@@ -4,6 +4,7 @@
 class Store {
   constructor(initState = {}) {
     this.state = initState;
+    this.counter = this.state.list.length //Решение задачи №2 - добавляем общий счетчик количества записей
     this.listeners = []; // Слушатели изменений состояния
   }
 
@@ -42,9 +43,11 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
+    
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: this.state.list.length + 1, title: 'Новая запись'}]
+      ...this.counter = ++this.counter,                                       //Решение задачи №2 - счетчик увеличивается при каждом добавлении записи
+      list: [...this.state.list, {code: this.counter, title: 'Новая запись'}] //Решение задачи №2 - заменили this.list.length на this.counter
     })
   };
 
@@ -67,8 +70,10 @@ class Store {
     this.setState({
       ...this.state,
       list: this.state.list.map(item => {
+        item.selected = false                                           //Решение задачи №1 - при каждом выделении записи сбрасываем выделение всем записям
         if (item.code === code) {
           item.selected = !item.selected;
+          item.selectCount ? ++item.selectCount : item.selectCount = 1; //Решение задачи №3 - добавляем счетчик выделений каждой записи
         }
         return item;
       })
