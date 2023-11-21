@@ -1,5 +1,5 @@
 import React from 'react';
-import {createElement} from './utils.js';
+import { createElement } from './utils.js';
 import './styles.css';
 
 /**
@@ -7,7 +7,7 @@ import './styles.css';
  * @param store {Store} Хранилище состояния приложения
  * @returns {React.ReactElement}
  */
-function App({store}) {
+function App({ store }) {
 
   const list = store.getState().list;
 
@@ -24,12 +24,14 @@ function App({store}) {
           list.map(item =>
             <div key={item.code} className='List-item'>
               <div className={'Item' + (item.selected ? ' Item_selected' : '')}
-                   onClick={() => store.selectItem(item.code)}>
+                onClick={() => store.selectItem(item.code)}>
                 <div className='Item-code'>{item.code}</div>
 
-                {item.selectCount > 1 //Решение задачи №3 - отображаем дополнительную надпись, если счетчик выделений больше 1
-                ? <div className='Item-title'>{item.title} | Выделяли {item.selectCount} раз</div>
-                : <div className='Item-title'>{item.title}</div>}
+                {
+                  item.selectCount > 1 //Решение задачи №3 - отображаем дополнительную надпись, если счетчик выделений больше 1
+                    ? <div className='Item-title'>{item.title} | Выделяли {item.selectCount} раз</div>
+                    : <div className='Item-title'>{item.title}</div>
+                }
 
                 <div className='Item-actions'>
                   <button onClick={() => store.deleteItem(item.code)}>
