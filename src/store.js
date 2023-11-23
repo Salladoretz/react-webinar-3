@@ -72,7 +72,9 @@ class Store {
       list: this.state.list.map(item => {
         if (item.code === code) {
           item.selected = !item.selected;
-          !item.selected ? '' : item.selectCount ? ++item.selectCount : item.selectCount = 1; //Решение задачи №3 - добавляем счетчик выделений каждой записи
+          if (item.selected === true) {
+            item.selectCount ? ++item.selectCount : item.selectCount = 1 //Решение задачи №3 - добавляем счетчик выделений каждой записи
+          }
         } else {
           item.selected = false //Решение задачи №1 - при каждом выделении записи сбрасываем выделение всем записям
         }
