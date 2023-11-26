@@ -1,10 +1,12 @@
+import { setCounter } from "./utils";
+
 /**
  * Хранилище состояния приложения
  */
 class Store {
   constructor(initState = {}) {
     this.state = initState;
-    this.counter = this.state.list.length //Решение задачи №2 - добавляем общий счетчик количества записей
+    this.counter = setCounter(this.state.list)    //Решение задачи №2 - добавляем общий счетчик, начальное значение берется по наибольшему коду записи в массиве
     this.listeners = []; // Слушатели изменений состояния
   }
 
@@ -76,7 +78,7 @@ class Store {
             item.selectCount ? ++item.selectCount : item.selectCount = 1 //Решение задачи №3 - добавляем счетчик выделений каждой записи
           }
         } else {
-          item.selected = false //Решение задачи №1 - при каждом выделении записи сбрасываем выделение всем записям
+          item.selected = false
         }
         return item;
       })

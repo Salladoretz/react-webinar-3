@@ -26,3 +26,24 @@ export function createElement(name, props = {}, ...children) {
 
   return element;
 }
+
+export function plural(num) {
+  if (num % 10 === 2 && num != 12 || num % 10 === 3 && num != 13 || num % 10 === 4 && num != 14) {
+    return ` | Выделяли ${num} раза`
+  } else {
+    return ` | Выделяли ${num} раз`
+  }
+}
+
+//Исправление замечаний 2
+export function setCounter(list) {
+
+  let arr = []
+  list.map(item => arr.push(Number(item.code)))
+
+  //отбираем записи только с числовым кодом
+  let result = arr.filter(item => !isNaN(item))
+
+  //возвращаем наибольшее значение, либо 0 при пустом массиве
+  return result.length ? Math.max.apply(0, result) : 0
+}

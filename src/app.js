@@ -1,5 +1,5 @@
 import React from 'react';
-import { createElement } from './utils.js';
+import { plural } from './utils.js';
 import './styles.css';
 
 /**
@@ -24,12 +24,13 @@ function App({ store }) {
           list.map(item =>
             <div key={item.code} className='List-item'>
               <div className={'Item' + (item.selected ? ' Item_selected' : '')}
-                onClick={() => store.selectItem(item.code)}>
+                //Предотвращение сброса выделения при удалении записи
+                onClick={e => { e.target.tagName != 'BUTTON' ? store.selectItem(item.code) : '' }}>
                 <div className='Item-code'>{item.code}</div>
 
                 {
-                  item.selectCount > 1 //Решение задачи №3 - отображаем дополнительную надпись, если счетчик выделений больше 1
-                    ? <div className='Item-title'>{item.title} | Выделяли {item.selectCount} раз</div>
+                  item.selectCount > 0 //Решение задачи №3 - отображаем дополнительную надпись, если счетчик выделений больше 0
+                    ? <div className='Item-title'>{item.title} {plural(item.selectCount)}</div>
                     : <div className='Item-title'>{item.title}</div>
                 }
 
@@ -42,8 +43,8 @@ function App({ store }) {
             </div>
           )}
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 
