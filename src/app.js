@@ -24,7 +24,6 @@ function App({ store }) {
     }, [store]),
 
     onDeleteItemFromBasket: useCallback(item => {
-      console.log('жопка')
       store.deleteItemFromBasket(item.code);
     }, [store])
   }
