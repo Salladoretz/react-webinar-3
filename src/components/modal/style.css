@@ -17,6 +17,7 @@ transform: scale(0);
 
 .Modal-container{
     background: white;
+    width: 100%;
     max-width: 960px;
     border-radius: 10px;
 }

@@ -2,21 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import './style.css';
 
-function Item({ item, onAddItemToBasket }) {
+function Item(props) {
 
   const callbacks = {
-    onAddItemToBasket: () => {
-      onAddItemToBasket(item);
+    onClick: () => {
+      props.onClick(props.item);
     }
   }
 
   return (
     <div className={'Item'}>
-      <div className='Item-code'>{item.code}</div>
-      <div className='Item-title'>{item.title}</div>
-      <div className='Item-price'>{item.price.toLocaleString()} ₽</div>
+      <div className='Item-code'>{props.item.code}</div>
+      <div className='Item-title'>{props.item.title}</div>
+      <div className='Item-price'>{props.info(props.item)}</div>
       <div className='Item-actions'>
-        <button onClick={callbacks.onAddItemToBasket}>Добавить</button>
+        <button onClick={callbacks.onClick}>{props.buttonName}</button>
       </div>
     </div>
   );
@@ -28,11 +28,13 @@ Item.propTypes = {
     title: PropTypes.string,
     price: PropTypes.number
   }).isRequired,
-  onAddItemToBasket: PropTypes.func
+  buttonName: PropTypes.string,
+  info: PropTypes.func,
+  onClick: PropTypes.func
 };
 
 Item.defaultProps = {
-  onAddItemToBasket: () => {
+  onClick: () => {
   }
 }
 

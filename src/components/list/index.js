@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import Item from "../item";
 import './style.css';
 
-function List({ list, onAddItemToBasket }) {
+function List({ arr, buttonName, info, onClick }) {
   return (
     <div className='List'>{
-      list.map(item =>
+      arr.map(item =>
         <div key={item.code} className='List-item'>
-          <Item item={item} onAddItemToBasket={onAddItemToBasket} />
+          <Item item={item} buttonName={buttonName} info={info} onClick={onClick} />
         </div>
       )}
     </div>
@@ -16,16 +16,18 @@ function List({ list, onAddItemToBasket }) {
 }
 
 List.propTypes = {
-  list: PropTypes.arrayOf(PropTypes.shape({
+  arr: PropTypes.arrayOf(PropTypes.shape({
     code: PropTypes.number,
     title: PropTypes.string,
     price: PropTypes.number
   })).isRequired,
-  onAddItemToBasket: PropTypes.func
+  buttonName: PropTypes.string,
+  info: PropTypes.func,
+  onClick: PropTypes.func
 };
 
 List.defaultProps = {
-  onAddItemToBasket: () => {
+  onClick: () => {
   }
 }
 

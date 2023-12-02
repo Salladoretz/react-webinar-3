@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import './style.css';
-import BasketItem from "../basketItem";
+import Item from "../item";
 
-function Modal({ basket, onDeleteItemFromBasket, totalPrice, activeModal, setActiveModal }) {
+function Modal({ arr, info, buttonName, onClick, totalPrice, activeModal, setActiveModal }) {
 
   return (
     <div className={activeModal ? 'Modal active' : 'Modal'}>
@@ -14,9 +14,9 @@ function Modal({ basket, onDeleteItemFromBasket, totalPrice, activeModal, setAct
             <button onClick={() => setActiveModal(false)}>Закрыть</button>
           </div>
         </div>
-        {basket.map(item =>
-          <div key={item.code} className='List-item'>
-            <BasketItem item={item} onDeleteItemFromBasket={onDeleteItemFromBasket} />
+        {arr.map(item =>
+          <div key={item.code}>
+            <Item item={item} info={info} buttonName={buttonName} onClick={onClick} />
           </div>
         )}
         <div className="Modal-footer">
@@ -29,20 +29,22 @@ function Modal({ basket, onDeleteItemFromBasket, totalPrice, activeModal, setAct
 }
 
 Modal.propTypes = {
-  basket: PropTypes.arrayOf(PropTypes.shape({
+  arr: PropTypes.arrayOf(PropTypes.shape({
     code: PropTypes.number,
     title: PropTypes.string,
     price: PropTypes.number,
     quantity: PropTypes.number
   })).isRequired,
-  onDeleteItemFromBasket: PropTypes.func,
-  totalPrice: PropTypes.number,
+  info: PropTypes.func,
+  buttonName: PropTypes.string,
+  onClick: PropTypes.func,
+  totalPrice: PropTypes.string,
   activeModal: PropTypes.bool,
   setActiveModal: PropTypes.func
 };
 
 Modal.defaultProps = {
-  onDeleteItemFromBasket: () => {
+  onClick: () => {
   }
 }
 
