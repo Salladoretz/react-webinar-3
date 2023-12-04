@@ -1,0 +1,26 @@
+.BasketItem {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  transition: background-color 1s;
+}
+
+.BasketItem-code {
+  padding: 20px 10px 20px 20px;
+}
+
+.BasketItem-title {
+  width: 100%;
+  padding: 20px 10px;
+  flex: 1;
+}
+
+.BasketItem-price {
+  padding: 20px 10px;
+}
+
+.BasketItem-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 20px 20px 10px;
+}

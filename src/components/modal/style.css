@@ -4,7 +4,7 @@ height: 100vh;
 position: fixed;
 top: 0;
 left: 0;
-background: rgba(0, 0, 0, 0.4);
+background: rgba(0, 0, 0, 0.7);
 display: flex;
 align-items: center;
 justify-content: center;
@@ -20,6 +20,7 @@ transform: scale(0);
     width: 100%;
     max-width: 960px;
     border-radius: 10px;
+    margin: 20px;
 }
 
 .Modal-header{

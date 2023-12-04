@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import './style.css';
-import Item from "../item";
+import BasketItem from "../basket-item";
 
-function Modal({ arr, info, buttonName, onClick, totalPrice, activeModal, setActiveModal }) {
+function Modal({ arr, onClick, totalSum, activeModal, setActiveModal }) {
 
   return (
     <div className={activeModal ? 'Modal active' : 'Modal'}>
@@ -16,12 +16,12 @@ function Modal({ arr, info, buttonName, onClick, totalPrice, activeModal, setAct
         </div>
         {arr.map(item =>
           <div key={item.code}>
-            <Item item={item} info={info} buttonName={buttonName} onClick={onClick} />
+            <BasketItem item={item} onClick={onClick} />
           </div>
         )}
         <div className="Modal-footer">
           <div>Итого</div>
-          <div>{totalPrice} ₽</div>
+          <div>{totalSum} ₽</div>
         </div>
       </div>
     </div>
@@ -35,10 +35,8 @@ Modal.propTypes = {
     price: PropTypes.number,
     quantity: PropTypes.number
   })).isRequired,
-  info: PropTypes.func,
-  buttonName: PropTypes.string,
   onClick: PropTypes.func,
-  totalPrice: PropTypes.string,
+  totalSum: PropTypes.string,
   activeModal: PropTypes.bool,
   setActiveModal: PropTypes.func
 };

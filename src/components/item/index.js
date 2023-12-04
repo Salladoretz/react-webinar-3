@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { local } from '../../utils'
 import './style.css';
 
 function Item(props) {
@@ -14,9 +15,9 @@ function Item(props) {
     <div className={'Item'}>
       <div className='Item-code'>{props.item.code}</div>
       <div className='Item-title'>{props.item.title}</div>
-      <div className='Item-price'>{props.info(props.item)}</div>
+      <div className='Item-price'>{local(props.item.price)} ₽</div>
       <div className='Item-actions'>
-        <button onClick={callbacks.onClick}>{props.buttonName}</button>
+        <button onClick={callbacks.onClick}>Добавить</button>
       </div>
     </div>
   );
@@ -28,8 +29,6 @@ Item.propTypes = {
     title: PropTypes.string,
     price: PropTypes.number
   }).isRequired,
-  buttonName: PropTypes.string,
-  info: PropTypes.func,
   onClick: PropTypes.func
 };
 

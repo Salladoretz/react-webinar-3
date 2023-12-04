@@ -40,6 +40,12 @@ class Store {
     for (const listener of this.listeners) listener();
   }
 
+  getTotalSum() {
+    return this.state.basket.map(item => {
+      return item.price * item.quantity
+    }).reduce((total, item) => total + item, 0).toLocaleString()
+  }
+
   addItemToBasket(item) {
 
     let arr = [...this.state.basket]

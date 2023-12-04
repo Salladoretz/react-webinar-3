@@ -13,7 +13,7 @@ function Headline(props) {
   return (
     <div className='Headline'>
       <div className='Headline-info'>В корзине: <span>{props.info}</span></div>
-      <button onClick={callbacks.onClick}>{props.buttonName}</button>
+      <button onClick={callbacks.onClick}>Перейти</button>
     </div>
   )
 }
