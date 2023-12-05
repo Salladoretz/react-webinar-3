@@ -1,4 +1,4 @@
-import { generateCode } from "./utils";
+import { generateCode, plural } from "./utils";
 
 /**
  * Хранилище состояния приложения
@@ -41,9 +41,17 @@ class Store {
   }
 
   getTotalSum() {
-    return this.state.basket.map(item => {
+    return Math.round(this.state.basket.map(item => {
       return item.price * item.quantity
-    }).reduce((total, item) => total + item, 0).toLocaleString()
+    }).reduce((total, item) => total + item, 0)).toLocaleString()
+  }
+
+  getBasketInfo() {
+    return this.state.basket.length > 0 ? `${this.state.basket.length} ${plural(this.state.basket.length, {
+      one: 'товар',
+      few: 'товара',
+      many: 'товаров'
+    })} / ${this.getTotalSum()} ₽` : 'пусто'
   }
 
   addItemToBasket(item) {

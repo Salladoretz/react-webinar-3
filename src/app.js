@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from 'react';
-import { plural } from './utils'
 import List from "./components/list";
 import Head from "./components/head";
 import PageLayout from "./components/page-layout";
@@ -15,7 +14,13 @@ function App({ store }) {
 
   const [activeModal, setActiveModal] = useState(false)
 
-  const list = store.getState().list;
+  const list = store.getState().list
+
+  const basket = store.getState().basket
+
+  const totalSum = store.getTotalSum()
+
+  const basketInfo = store.getBasketInfo()
 
   const callbacks = {
     onAddItemToBasket: useCallback(item => {
@@ -26,16 +31,6 @@ function App({ store }) {
       store.deleteItemFromBasket(item.code);
     }, [store])
   }
-
-  const basket = store.getState().basket
-
-  const totalSum = store.getTotalSum()
-
-  const basketInfo = basket.length > 0 ? `${basket.length} ${plural(basket.length, {
-    one: 'товар',
-    few: 'товара',
-    many: 'товаров'
-  })} / ${totalSum} ₽` : 'пусто'
 
   return (
     <PageLayout>
@@ -49,15 +44,17 @@ function App({ store }) {
         arr={list}
         onClick={callbacks.onAddItemToBasket} />
 
-      <Modal
-        arr={basket}
-        onClick={callbacks.onDeleteItemFromBasket}
-        totalSum={totalSum}
-        activeModal={activeModal}
-        setActiveModal={setActiveModal} />
+      {activeModal ?
+        <Modal
+          arr={basket}
+          onClick={callbacks.onDeleteItemFromBasket}
+          totalSum={totalSum}
+          activeModal={activeModal}
+          setActiveModal={setActiveModal} />
+        : ''}
 
     </PageLayout>
-  );
+  )
 }
 
 export default App;
